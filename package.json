@@ -1,0 +1,33 @@
+{
+  "name": "slow-data",
+  "version": "0.0.1",
+  "description": "Generated anolog data by schema",
+  "author": "huyinghuan",
+  "homepage": "https://github.com/huyinghuan/slow-data",
+  "keywords": [
+    "slow-data",
+    "slow"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/huyinghuan/slow-data.git"
+  },
+  "bugs": {
+    "url": "https://github.com/huyinghuan/slow-data/issues",
+    "email": "ec.huyinghuan@gmail.com"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "https://gist.githubusercontent.com/huyinghuan/a03ffed8877dc6822275/raw/4a78514616df437e15daa5a010ade50f5e882e7c/LICENSE"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "randexp": "^0.4.0"
+  },
+  "scripts": {
+    "prepublish": "coffee --no-header -o ./ -c src/"
+  }
+}
