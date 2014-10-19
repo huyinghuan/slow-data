@@ -1,5 +1,5 @@
-_http = require('http')
-
+_http = require 'http'
+_utils = require './utils'
 
 class SlowData
   constructor: ->
@@ -7,5 +7,7 @@ class SlowData
   init: (routerConfig, schemaDirectory)->
   #数据端口
   start: (port)->
-
+  #简单数据类型生成。除object类型以外的任意数据生成。
+  gen: (exp)->
+    _utils.gen exp
 module.exports = new SlowData()
