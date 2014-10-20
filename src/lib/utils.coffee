@@ -4,6 +4,4 @@ module.exports = utils = ->
 
 util.gen = (exp)->
 
-
-
-
+util.genObj = (schema)->

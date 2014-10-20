@@ -10,4 +10,7 @@ class SlowData
   #简单数据类型生成。除object类型以外的任意数据生成。
   gen: (exp)->
     _utils.gen exp
+  #生成数据对象
+  genObj: (schema)->
+    _utils.genObj schema
 module.exports = new SlowData()

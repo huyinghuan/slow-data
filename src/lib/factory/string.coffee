@@ -2,7 +2,7 @@ _ = require 'lodash'
 _gen = require '../gen'
 module.exports = (options)->
   def =
-    min: 0
+    min: 6
     max: 12
     special: false  #允许特殊字符？
     number: false #允许数字？
@@ -22,8 +22,7 @@ module.exports = (options)->
     exp = "#{exp}|[0-9]"
 
   reg = ["(", exp, ")", limit].join("")
-  _gen reg
+  value = _gen reg
 
-
-
-
+  return value.toUpperCase() if def.upper
+  return value.toLowerCase() if def.lower
