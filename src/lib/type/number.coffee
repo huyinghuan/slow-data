@@ -1,12 +1,19 @@
 _ = require 'lodash'
 #$number(1,10,0)
+
+vertify = (options)->
+  for key, value of options
+    if not _.isNumber(value) or parseInt(value) isnt value
+      return false
+  return true
+
 module.exports = (exp)->
-  reg = /(^\$number$)|(^\$number\[[^\[\]]*\]$)/
-  return undefined if not reg.test exp
   type = "number"
   orig = ["$number", "$number[]", "$number()"]
-
   return type: type if _.indexOf(orig, exp) isnt -1
+
+  reg = /^\$number\[[^\[\]]*\]$/
+  return undefined if not reg.test exp
 
   args = exp.match /\d+/g
 
@@ -27,5 +34,8 @@ module.exports = (exp)->
       min: args[0]
       max: args[1]
       fixed: args[2]
+
+  if not vertify(result.options)
+    throw new Error("invalid arguments")
 
   return result

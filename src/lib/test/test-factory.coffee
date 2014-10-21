@@ -1,6 +1,6 @@
-_string = require './factory/string'
-_number = require './factory/number'
-_common = require './factory/common'
+_string = require './../factory/string'
+_number = require './../factory/number'
+_common = require './../factory/common'
 genString = ()->
   options =
     special: true
