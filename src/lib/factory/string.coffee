@@ -10,7 +10,6 @@ module.exports = (options)->
     lower: false #全部写
 
   _.extend def, options
-
   limit = "{#{def.min},#{def.max}}"
   exp = ""
   if def.special
@@ -22,7 +21,9 @@ module.exports = (options)->
     exp = "#{exp}|[0-9]"
 
   reg = ["(", exp, ")", limit].join("")
+  reg = new RegExp reg
   value = _gen reg
 
   return value.toUpperCase() if def.upper
   return value.toLowerCase() if def.lower
+  return value

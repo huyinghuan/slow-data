@@ -9,7 +9,9 @@ testNumber = ->
 
 testString = ->
   queue = ["$string", "$string[]", "$string()", "$string[1]",
-           "$string[2,3]", "$string[3, 2, 1]", "$string[3,2,1,1,0,0]"]
+           "$string[2,3]", "$string[3, 12, 1]", "$string[3,12,1,1,0,0]",
+          "$string[3, 22, 1, true, false]"
+  ]
   console.log _string index for index in queue
 
 testString()

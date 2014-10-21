@@ -5,7 +5,7 @@ module.exports = (exp)->
   orig = ["$string", "$string[]", "$string()"]
   return type: type if _.indexOf(orig, exp) isnt -1
 
-  reg = /^\$string\[[^\[\]]*\]$/
+  reg = /^\$string\[(\d|true|false|\,|\ )*\]$/
   return undefined if not reg.test exp
 
   args = exp.replace(/\$string(\[.*\])/, "$1")
