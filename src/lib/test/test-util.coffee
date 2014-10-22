@@ -17,4 +17,13 @@ testString = ->
   ]
   console.log _utils.gen exp for exp in queue
 
-testString()
+#testString()
+testObj = ()->
+  schema =
+    name: "$string[5]"
+    age: "$number[1, 150]"
+    email: /\w{8}@\w{2,5}\.\w{2,4}/
+    birth: "$date"
+  console.log _utils.genObj schema
+
+testObj()
