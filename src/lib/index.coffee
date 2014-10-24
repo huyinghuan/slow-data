@@ -7,7 +7,7 @@ class SlowData
   init: (routerConfig, schemaDirectory)->
   #数据端口
   start: (port)->
-  #简单数据类型生成。除object类型以外的任意数据生成。
+  #简单数据类型生成。除object, array类型以外的任意数据生成。
   gen: (exp)->
     _utils.gen exp
   #生成数据对象
