@@ -31,6 +31,7 @@
     "sload": "^0.1.2"
   },
   "scripts": {
-    "prepublish": "coffee --no-header -o ./ -c src/"
+    "prepublish": "coffee --no-header -o ./ -c src/",
+    "pretest": "coffee --no-header -o ./ -c src/"
   }
 }

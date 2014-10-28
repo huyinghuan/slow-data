@@ -33,7 +33,6 @@ genObj = (schema)->
   return {} if not _.isPlainObject schema
   obj = {}
   for key, value of schema
-    console.log key, value, gen value
     obj[key] = gen value
   return obj
 

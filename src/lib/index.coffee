@@ -11,6 +11,7 @@ class SlowData
   gen: (exp)->
     _utils.gen exp
   #生成数据对象
-  genObj: (schema)->
-    _utils.genObj schema
+  genObject: (bean)->
+    _utils.genObj bean
+  buildSchema: (schema)->
 module.exports = new SlowData()

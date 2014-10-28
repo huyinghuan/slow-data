@@ -1,3 +1,4 @@
 _slowData = require '../lib/index'
-_slowData.init 'router.json', "schema"
-_slowData.start()
+_peopleSchema = require './shema/people'
+
+console.log _slowData.genObject _peopleSchema.module
