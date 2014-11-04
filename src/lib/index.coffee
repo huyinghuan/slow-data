@@ -1,5 +1,6 @@
 _http = require 'http'
-_utils = require './utils'
+_schema = require './schema'
+
 
 class SlowData
   constructor: ->
@@ -9,9 +10,10 @@ class SlowData
   start: (port)->
   #简单数据类型生成。除object, array类型以外的任意数据生成。
   gen: (exp)->
-    _utils.gen exp
+    _schema.genField exp
   #生成数据对象
   genObject: (bean)->
-    _utils.genObj bean
+    _schema.genObj bean
   buildSchema: (schema)->
+
 module.exports = new SlowData()
