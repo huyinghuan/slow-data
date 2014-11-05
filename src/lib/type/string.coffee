@@ -2,13 +2,13 @@ _ = require 'lodash'
 #string[1,2,true,false,true,false]
 module.exports = (exp)->
   type = "string"
-  orig = ["$string", "$string[]", "$string()"]
+  orig = ["$string", "$string()"]
   return type: type if _.indexOf(orig, exp) isnt -1
 
-  reg = /^\$string\[(\d|true|false|\,|\ )*\]$/
+  reg = /^\$string\((\d|true|false|\,|\ )*\)$/
   return undefined if not reg.test exp
 
-  args = exp.replace(/\$string(\[.*\])/, "$1")
+  args = exp.replace(/\$string(\(.*\))/, "$1")
   try
    args = JSON.parse args
   catch error

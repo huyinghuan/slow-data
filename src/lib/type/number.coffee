@@ -9,10 +9,10 @@ vertify = (options)->
 
 module.exports = (exp)->
   type = "number"
-  orig = ["$number", "$number[]", "$number()"]
+  orig = ["$number", "$number()"]
   return type: type if _.indexOf(orig, exp) isnt -1
 
-  reg = /^\$number\[[\d\,\ ]*\]$/
+  reg = /^\$number\([\d\,\ ]*\)$/
   return undefined if not reg.test exp
 
   args = exp.match /\d+/g

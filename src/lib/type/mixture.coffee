@@ -6,8 +6,8 @@
 _utils = require '../utils'
 
 module.exports = (exp)->
-  type = _utils.getFileName __filename
-  reg = /^\$mixtrue\[.*\]$/
+  reg = /^\$mixtrue(\[.*\])$/
   return undefined if not reg.test exp
-  arrStr = exp.replace(/\$mixtrue\[/, "").replace(/\]$/, "")
+  type = _utils.getFileName __filename
+  arrStr = exp.replace(/\$mixtrue/, "")
   arr = JSON.parse arrStr
