@@ -5,12 +5,12 @@ module.exports = (exp)->
   orig = ["$string", "$string()"]
   return type: type if _.indexOf(orig, exp) isnt -1
 
-  reg = /^\$string\((\d|true|false|\,|\ )*\)$/
+  reg = /^\$string\((.*)\)$/
   return undefined if not reg.test exp
 
-  args = exp.replace(/\$string(\(.*\))/, "$1")
+  args = exp.replace(reg, "$1")
   try
-   args = JSON.parse args
+   args = JSON.parse "[#{args}]"
   catch error
     return undefined
 

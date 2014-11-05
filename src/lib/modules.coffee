@@ -6,7 +6,7 @@
 module.exports =
   common: true
   date: true
-  generic: false
+  generic: true
   mixture: true
   number: true
   regexp: true
