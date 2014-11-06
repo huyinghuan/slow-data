@@ -7,7 +7,6 @@ module.exports = utils = ->
 
 #生成模拟数据
 genField = (exp, modules)->
-  console.log modules
   #获取 exp 类型区分函数
   options =
     ignore: (exp)->
