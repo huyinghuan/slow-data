@@ -11,4 +11,5 @@ module.exports = utils = {}
 utils.getFileName = (fileName)->
   dirs = fileName.split _path.sep
   filename = dirs.pop()
-  filename.substr(0, filename.lastIndexOf('.'))
+  index = filename.lastIndexOf('.')
+  if index is -1 then filename else filename.substr(0, index)

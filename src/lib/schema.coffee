@@ -1,23 +1,35 @@
+###
+  修改字段生成相关条件
+  author: ec.huyinghuan@gmail.com
+  date: 14-11.08
+###
+
 _ = require 'lodash'
 _sload = require 'sload'
 _path = require 'path'
+_fs = require 'fs'
 _utils = require './utils'
 
-module.exports = utils = ->
+module.exports = schema = ->
 
-#生成模拟数据
-genField = (exp, modules)->
+#获取模板函数列表
+genField = (expression, templateEnable, templateAvailable)->
   #获取 exp 类型区分函数
   options =
     ignore: (exp)->
       type = _utils.getFileName exp
-      not modules[type]
+      not templateEnable[type]
 
-  classifyList = _sload.scan 'type', __dirname, options
+  #扫描模板函数
+  functions = []
+  for availablePath in templateAvailable
+    functions = functions.concat _sload.scan 'type', availablePath, options
+
+  #获取数据处理函数名称和相关参数
   factory = undefined
   try
-    for classify in classifyList
-      factory = classify exp
+    for classify in functions
+      factory = classify expression
       continue if factory is undefined
       break
   catch e
@@ -26,14 +38,22 @@ genField = (exp, modules)->
   if factory is undefined
     factory =
       type: "undefined"
-      options: exp
+      options: expression
 
-  build = _sload factory.type, _path.join(__dirname, "factory")
+  #加载数据处理函数
+  buildPath = undefined
+  for factoryPath in templateAvailable
+    tmpPath =  _path.join factoryPath, 'factory', factory.type
+    if fs.existsSync "#{tmpPath}.js"
+      buildPath = tmpPath
+      break
+
+  return expression if not buildPath
+  build = require buildPath
   try
     build factory.options
   catch e
-    return exp
-
+    return expression
 
 #生成模拟数据对象
 genObj = (schema, modules)->
@@ -43,5 +63,5 @@ genObj = (schema, modules)->
     obj[key] = genField value, modules
   return obj
 
-utils.genField = genField
-utils.genObj = genObj
+schema.genField = genField
+schema.genObj = genObj
