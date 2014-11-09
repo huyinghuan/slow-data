@@ -1,5 +1,5 @@
 _ = require 'lodash'
-#string[1,2,true,false,'upper | lower']
+#string[1,2,true,false,'1 | 0']
 module.exports = (exp)->
   type = "string"
   orig = ["$string", "$string()"]

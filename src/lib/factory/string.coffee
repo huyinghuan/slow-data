@@ -23,6 +23,6 @@ module.exports = (options)->
   reg = new RegExp reg
   value = _gen reg
 
-  return value.toUpperCase() if def.sensitive is 'upper'
-  return value.toLowerCase() if def.sensitive if 'lower'
+  return value.toUpperCase() if def.sensitive is 1
+  return value.toLowerCase() if def.sensitive if 0
   return value

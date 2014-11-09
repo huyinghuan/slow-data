@@ -32,7 +32,7 @@ testRegexp = ->
 #testRegexp()
 
 testMixture = ->
-  queue = ['$mixture("$string()", "$number()")']
+  queue = ['$$("$string()", "$number()")']
   console.log _mixture index for index in queue
 
 #testMixture()

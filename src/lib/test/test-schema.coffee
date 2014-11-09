@@ -15,8 +15,8 @@ testString = ->
   queue = [
     "$string", "$string()",
     "$string(2,3)",
-    '$string(3, 12, 1)', '$string(3,12,1,1,"lower")',
-    '$string(3, 22, 1, true, "upper")'
+    '$string(3, 12, 1)', '$string(3,12,1,1,0)',
+    '$string(3, 22, 1, true, 1)'
   ]
   console.log _schema.genField exp, functions for exp in queue
   #console.log _schema.genField "$string", functions
