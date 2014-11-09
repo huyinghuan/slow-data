@@ -12,7 +12,8 @@ _utils = require './utils'
 
 module.exports = schema = ->
 
-getTemplateFunctions = (templateEnable = {}, templateAvailable)->
+#获取模板函数列表
+getTemplateFunctionList = (templateEnable = {}, templateAvailable)->
   #方便测试
   if templateAvailable is undefined
     templateAvailable= [_path.join(__dirname, 'type')]
@@ -30,8 +31,8 @@ getTemplateFunctions = (templateEnable = {}, templateAvailable)->
 
   return functions
 
-#获取模板函数列表
-genField = (expression, functions, templateAvailable)->
+#获取 module路径和参数
+getTemplateFunction = (expression, functions, templateAvailable)->
   #方便测试
   if templateAvailable is undefined
     templateAvailable = [_path.join(__dirname, 'factory') ]
@@ -60,21 +61,7 @@ genField = (expression, functions, templateAvailable)->
       buildPath = tmpPath
       break
 
-  return expression if not buildPath
-  build = require buildPath
-  try
-    build factory.options
-  catch e
-    return expression
+  return buildPath: buildPath, arguments: [factory.options]
 
-#生成模拟数据对象
-genObj = (schema, functions, availableTemplates)->
-  return {} if not _.isPlainObject schema
-  obj = {}
-  for key, value of schema
-    obj[key] = genField value, functions, availableTemplates
-  return obj
-
-schema.getTemplateFunctions = getTemplateFunctions
-schema.genField = genField
-schema.genObj = genObj
+schema.getTemplateFunctionList = getTemplateFunctionList
+schema.getTemplateFunction = getTemplateFunction

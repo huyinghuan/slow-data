@@ -31,15 +31,29 @@ class SlowData
     @templateAvailableFactory = _.map @options.templateAvailable, (filePath)->
       return _path.join(filePath, 'factory')
 
-    @templateFunctionList = _schema.getTemplateFunctions @options.templateEnable, @templateAvailableType
+    @templateFunctionList = _schema.getTemplateFunctionList @options.templateEnable, @templateAvailableType
 
   #简单数据类型生成。除object, array类型以外的任意数据生成。
-  gen: (exp)->
-    _schema.genField exp, @templateFunctionList, @templateAvailableFactory
+  gen: (exp, context = {})->
+    #获取 数据生成module的路径和参数
+    func = _schema.getTemplateFunction exp, @templateFunctionList, @templateAvailableFactory
+    #是否存在该module
+    return exp if not func.buildPath
+
+    build = require func.buildPath
+    try
+      build.apply context, func.arguments
+    catch e
+      return exp
+
 
   #生成数据对象
-  genObject: (bean)->
-   _schema.genObj bean, @templateFunctionList, @templateAvailableFactory
+  genObject: (bean, context = {})->
+    return {} if not _.isPlainObject bean
+    obj = {}
+    for key, value of bean
+      obj[key] = @gen value, context
+    return obj
 
   build: (schema)->
 
