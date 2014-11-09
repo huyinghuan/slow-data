@@ -46,6 +46,7 @@ getTemplateFunction = (expression, functions, templateAvailable)->
       break
   catch e
     console.warn "Can't resolve #{expression}"
+    console.log e.stack
     factory = undefined
 
   if factory is undefined
