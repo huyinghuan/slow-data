@@ -12,19 +12,22 @@ _utils = require './utils'
 
 module.exports = schema = ->
 
-#获取模板函数列表
-genField = (expression, templateEnable, templateAvailable)->
+getTemplateFunctions = (templateEnable, templateAvailable)->
   #获取 exp 类型区分函数
   options =
-    ignore: (exp)->
-      type = _utils.getFileName exp
-      not templateEnable[type]
+    ignore: (filename)->
+      type = _utils.getFileName filename
+      templateEnable[type] is false
 
   #扫描模板函数
   functions = []
   for availablePath in templateAvailable
-    functions = functions.concat _sload.scan 'type', availablePath, options
+    functions = functions.concat _sload.scan availablePath, options
 
+  return functions
+
+#获取模板函数列表
+genField = (expression, functions, templateAvailable)->
   #获取数据处理函数名称和相关参数
   factory = undefined
   try
@@ -33,6 +36,7 @@ genField = (expression, templateEnable, templateAvailable)->
       continue if factory is undefined
       break
   catch e
+    console.warn "Can't resolve #{expression}"
     factory = undefined
 
   if factory is undefined
@@ -43,8 +47,8 @@ genField = (expression, templateEnable, templateAvailable)->
   #加载数据处理函数
   buildPath = undefined
   for factoryPath in templateAvailable
-    tmpPath =  _path.join factoryPath, 'factory', factory.type
-    if fs.existsSync "#{tmpPath}.js"
+    tmpPath =  _path.join factoryPath, factory.type
+    if _fs.existsSync("#{tmpPath}.js") or _fs.existsSync("#{tmpPath}.coffee")
       buildPath = tmpPath
       break
 
@@ -56,12 +60,13 @@ genField = (expression, templateEnable, templateAvailable)->
     return expression
 
 #生成模拟数据对象
-genObj = (schema, modules)->
+genObj = (schema, functions, availableTemplates)->
   return {} if not _.isPlainObject schema
   obj = {}
   for key, value of schema
-    obj[key] = genField value, modules
+    obj[key] = genField value, functions, availableTemplates
   return obj
 
+schema.getTemplateFunctions = getTemplateFunctions
 schema.genField = genField
 schema.genObj = genObj
