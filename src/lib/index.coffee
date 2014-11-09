@@ -4,7 +4,7 @@ _sload = require 'sload'
 _path = require 'path'
 _schema = require './schema'
 _utils = require './utils'
-
+_special = require './special/index'
 class SlowData
   constructor: (schemaDirectory, options)->
     @schemaDirectroy = false
@@ -33,8 +33,22 @@ class SlowData
 
     @templateFunctionList = _schema.getTemplateFunctionList @options.templateEnable, @templateAvailableType
 
+  genSpecialField: (exp, context)->
+    try
+      group = _special.getTemplateGroup exp
+    catch e
+      console.warn "Can't resolve mixture group"
+      return exp
+
+    queue = []
+    queue.push @gen field, context for field in group
+    return queue.join ''
+
   #简单数据类型生成。除object, array类型以外的任意数据生成。
   gen: (exp, context = {})->
+    #是否为合成字段
+    return @genSpecialField exp, context if _special.isSpecial exp
+
     #获取 数据生成module的路径和参数
     func = _schema.getTemplateFunction exp, @templateFunctionList, @templateAvailableFactory
     #是否存在该module

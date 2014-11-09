@@ -7,4 +7,5 @@ module.exports =
     generic: "$($asdasd)"
     regexp: "$regexp([(a-z)]{4,5})"
     mydefined: "$my(123)"
+    mix: '$$("$string", "_","$number(1, 5)")'
   number: 100, #[1, 100] #数量
