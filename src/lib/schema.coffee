@@ -12,7 +12,11 @@ _utils = require './utils'
 
 module.exports = schema = ->
 
-getTemplateFunctions = (templateEnable, templateAvailable)->
+getTemplateFunctions = (templateEnable = {}, templateAvailable)->
+  #方便测试
+  if templateAvailable is undefined
+    templateAvailable= [_path.join(__dirname, 'type')]
+
   #获取 exp 类型区分函数
   options =
     ignore: (filename)->
@@ -28,6 +32,10 @@ getTemplateFunctions = (templateEnable, templateAvailable)->
 
 #获取模板函数列表
 genField = (expression, functions, templateAvailable)->
+  #方便测试
+  if templateAvailable is undefined
+    templateAvailable = [_path.join(__dirname, 'factory') ]
+
   #获取数据处理函数名称和相关参数
   factory = undefined
   try

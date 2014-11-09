@@ -6,8 +6,7 @@ module.exports = (options)->
     max: 12
     special: false  #允许特殊字符？
     number: false #允许数字？
-    upper: false #全部大写？
-    lower: false #全部写
+    sensitive: false #是否全部为大或小写 upper #全部大写 lower: false #全部小写
 
   _.extend def, options
   limit = "{#{def.min},#{def.max}}"
@@ -24,6 +23,6 @@ module.exports = (options)->
   reg = new RegExp reg
   value = _gen reg
 
-  return value.toUpperCase() if def.upper
-  return value.toLowerCase() if def.lower
+  return value.toUpperCase() if def.sensitive is 'upper'
+  return value.toLowerCase() if def.sensitive if 'lower'
   return value

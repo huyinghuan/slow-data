@@ -1,10 +1,9 @@
 _ = require 'lodash'
-#string[1,2,true,false,true,false]
+#string[1,2,true,false,'upper | lower']
 module.exports = (exp)->
   type = "string"
   orig = ["$string", "$string()"]
   return type: type if _.indexOf(orig, exp) isnt -1
-
   reg = /^\$string\((.*)\)$/
   return undefined if not reg.test exp
 
@@ -31,7 +30,6 @@ module.exports = (exp)->
 
   options.special = !!args[2] if args[2]?
   options.number = !!args[3] if args[3]?
-  options.upper = !!args[4] if args[4]?
-  options.lower = !!args[5] if args[5]?
+  options.sensitive = args[4] if args[4]?
 
   return type:type, options: options
