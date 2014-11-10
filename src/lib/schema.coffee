@@ -64,5 +64,16 @@ getTemplateFunction = (expression, functions, templateAvailable)->
 
   return buildPath: buildPath, arguments: [factory.options]
 
+getSchema = (schema, schemaDirectory)->
+  return schema if _.isPlainObject schema
+  return false if not _.isString schema
+  try
+    filePath = _path.join schemaDirectory, schema
+    bean = require filePath
+  catch e
+    return false
+  return bean
+
+schema.getSchema = getSchema
 schema.getTemplateFunctionList = getTemplateFunctionList
 schema.getTemplateFunction = getTemplateFunction

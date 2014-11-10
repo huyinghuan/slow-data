@@ -1,5 +1,6 @@
 _http = require 'http'
 _ = require 'lodash'
+_fs = require 'fs'
 _sload = require 'sload'
 _path = require 'path'
 _schema = require './schema'
@@ -23,7 +24,8 @@ class SlowData
     if options.templateEnable
       _.extend @options.templateEnable, options.templateEnable
     if options.templateAvailable
-      @options.templateAvailable = @options.templateAvailable.concat options.templateAvailable
+      @options.templateAvailable =
+        @options.templateAvailable.concat options.templateAvailable
 
     @templateAvailableType  = _.map @options.templateAvailable, (filePath)->
       return _path.join(filePath, 'type')
@@ -31,8 +33,11 @@ class SlowData
     @templateAvailableFactory = _.map @options.templateAvailable, (filePath)->
       return _path.join(filePath, 'factory')
 
-    @templateFunctionList = _schema.getTemplateFunctionList @options.templateEnable, @templateAvailableType
+    #获取可用数据生成函数集合
+    @templateFunctionList =
+      _schema.getTemplateFunctionList @options.templateEnable, @templateAvailableType
 
+  #产生特殊表达式数据
   genSpecialField: (exp, context)->
     try
       group = _special.getTemplateGroup exp
@@ -69,6 +74,23 @@ class SlowData
       obj[key] = @gen value, context
     return obj
 
-  build: (schema)->
+  build: (schemaPlain, context = {})->
+    schema = _schema.getSchema schemaPlain, @schemaDirectroy
+    return schemaPlain if not _.isPlainObject schema
+
+    bean = schema.module
+    length = schema.length
+
+    if length is undefined
+      return @genObject(bean, _.extend(context, {index: 0}))
+
+    queue = []
+    for index in [0..length]
+      queue.push @genObject(bean, _.extend(context, {index: index}))
+
+    return queue
+
+
+
 
 module.exports = SlowData

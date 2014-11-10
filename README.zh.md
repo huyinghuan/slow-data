@@ -33,7 +33,7 @@ max: 最大值 default Math.power(2, 32)
 fixed: 保留的小数位数 default 0
 ```
 
-当只有min一个参数时， 则min为最大值。 即 $min(a)产生  [-Math.power(2, 32), a]之间的随机值
+当只有min一个参数时， 则min为最大值。 即 $number(a)产生  [-Math.power(2, 32), a]之间的随机值
 
 ### common
 
