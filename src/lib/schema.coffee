@@ -71,6 +71,7 @@ getSchema = (schema, schemaDirectory)->
     filePath = _path.join schemaDirectory, schema
     bean = require filePath
   catch e
+    console.log e.stack
     return false
   return bean
 

@@ -53,16 +53,15 @@ class SlowData
   gen: (exp, context = {})->
     #是否为合成字段
     return @genSpecialField exp, context if _special.isSpecial exp
-
     #获取 数据生成module的路径和参数
     func = _schema.getTemplateFunction exp, @templateFunctionList, @templateAvailableFactory
     #是否存在该module
     return exp if not func.buildPath
-
     build = require func.buildPath
     try
       build.apply context, func.arguments
     catch e
+      console.log e.stack
       return exp
 
 
@@ -76,6 +75,7 @@ class SlowData
 
   build: (schemaPlain, context = {})->
     schema = _schema.getSchema schemaPlain, @schemaDirectroy
+    console.log schema
     return schemaPlain if not _.isPlainObject schema
 
     bean = schema.module
@@ -89,8 +89,5 @@ class SlowData
       queue.push @genObject(bean, _.extend(context, {index: index}))
 
     return queue
-
-
-
 
 module.exports = SlowData

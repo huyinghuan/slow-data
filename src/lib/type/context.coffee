@@ -6,11 +6,7 @@
 
 module.exports = (exp)->
   type = 'context'
-
   reg = /^\@([^@].*)$/
-
-  return undefined if reg.test exp
-
+  return undefined if not reg.test exp
   content = exp.replace reg, '$1'
-
   type: type, options: content
