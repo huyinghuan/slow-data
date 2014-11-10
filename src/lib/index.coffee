@@ -12,6 +12,11 @@ class SlowData
     @options =
       templateEnable: require './modules' #启用了哪些数据生成模块
       templateAvailable: [__dirname] #拥有哪些数据模块
+
+    if _.isPlainObject(schemaDirectory)
+      options = schemaDirectory
+      schemaDirectory = false
+
     @init(schemaDirectory, options)
 
   #schema文件夹
