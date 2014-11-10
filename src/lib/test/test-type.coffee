@@ -2,7 +2,7 @@ _number = require './../type/number'
 _string = require './../type/string'
 _generic = require './../type/generic'
 _regexp = require './../type/regexp'
-_mixture = require './../type/mixture'
+#_mixture = require './../type/mixture'
 
 testNumber = ->
   queue = ["$number", "$number(1)", "$number(2,3)", "$number(3,2,1)"]
@@ -31,8 +31,8 @@ testRegexp = ->
 
 #testRegexp()
 
-testMixture = ->
-  queue = ['$$("$string()", "$number()")']
-  console.log _mixture index for index in queue
+#testMixture = ->
+#  queue = ['$$("$string()", "$number()")']
+#  console.log _mixture index for index in queue
 
 #testMixture()
