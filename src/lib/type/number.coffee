@@ -1,5 +1,12 @@
+###
+  生成数字
+  $number(min, max, fixed)
+  @author ec.huyinghuan@gmail.com
+  @date:  14/11/10
+  @type: update
+###
+
 _ = require 'lodash'
-#$number(1,10,0)
 
 vertify = (options)->
   for key, value of options
