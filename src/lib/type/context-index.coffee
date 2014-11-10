@@ -9,7 +9,7 @@ module.exports = (exp)->
   type = "context-index"
   orig = ["@index", "@index()"]
   return type: type if _.indexOf(orig, exp) isnt -1
-  reg = /^\@index\(([\+\*-\/]),\s*(\d+)\)$/
+  reg = /^\@\@index\(([\+\*-\/]),\s*(\d+)\)$/
   return undefined if not reg.test exp
   content = exp.replace reg, '$1,$2'
   content = content.split(',')

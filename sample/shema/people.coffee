@@ -9,5 +9,5 @@ module.exports =
     mydefined: "$my(123)"
     mix: '$$("$string", "_","$number(1, 5)", "-", "@index")'
     index: '@index'
-    indexMix: '@index(*, 2)'
+    indexMix: '@@index(*, 2)'
   length: 10, #[1, 100] #数量
