@@ -138,6 +138,19 @@ fixed: 保留的小数位数 default 0
 
 ### date
 
+
+|Key    | Shorthand|
+|------ | --------|
+|years  | y|
+|months | M|
+|weeks  | w|
+|days   | d|
+|hours  | h|
+|minutes| m|
+|seconds| s|
+|milliseconds | ms|
+
+
 ### time
 
 ## 参考正则表达式

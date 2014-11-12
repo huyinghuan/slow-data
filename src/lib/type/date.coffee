@@ -1,5 +1,5 @@
 ###
-  $date(start, end, step, format)
+  $date(start, step, format)
   生成日期数据
   author: ec.huyinghuan@gmail.com
   date: 14-11.06
