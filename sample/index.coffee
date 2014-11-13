@@ -10,10 +10,6 @@ schemaPath = _path.join __dirname, 'schema'
 
 _slowData = new _SlowData(schemaPath, options)
 
-#console.log _slowData.build 'people'
-#console.log _slowData.build _peopleSchema
-#_slowData.init()
-#console.log _slowData.genObject _peopleSchema.module
-
-#for index in [0..1]
-#  console.log _slowData.genObject _peopleSchema.module, {index: index}
+console.log _slowData.build 'people'
+console.log _slowData.build _peopleSchema
+console.log _slowData.genObject _peopleSchema.module

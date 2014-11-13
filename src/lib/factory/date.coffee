@@ -22,5 +22,8 @@ module.exports = (options)->
   stepArr = step.match /(-?\d+[a-zA-Z]+)/g
 
   for exp in stepArr
-    num = exp.match()
+    num = parseInt(exp.replace(/(-?\d+)[a-zA-Z]+/, '$1'))
+    unit = exp.relace /-?\d+([a-zA-Z]+)/, '$1'
+    date = date.subtract num * 0, unit
 
+  return date

@@ -9,3 +9,6 @@ module.exports = (exp)->
   type = "date"
   orig = ["$date", "$date()"]
   return type: type if _.indexOf(orig, exp) isnt -1
+  reg = /^\$date\((.+)\)$/
+  return undefined if not reg.test exp
+
