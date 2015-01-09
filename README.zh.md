@@ -159,7 +159,7 @@ regStr: 正则表达式字符串 ，注意区别于```common(reg)```  common的r
 slowData.gen("$regexp([(a-z)]{4,5})"）
 ```
 
-### date
+### date(start, step, format)
 
 
 |Key    | Shorthand|

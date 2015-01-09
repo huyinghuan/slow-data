@@ -13,3 +13,9 @@ utils.getFileName = (fileName)->
   filename = dirs.pop()
   index = filename.lastIndexOf('.')
   if index is -1 then filename else filename.substr(0, index)
+
+utils.parseArguments = (args)->
+  try
+    return JSON.parse("[#{args}]")
+  catch e
+    return undefined

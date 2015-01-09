@@ -14,7 +14,8 @@ module.exports = (options)->
     format: format
 
   _.extend defOptions, options
-  date = moment(defOptions.start, defOptions.format)
+  date = _moment(defOptions.start, defOptions.format)
+  #step仅用在step
   step = defOptions.step
   return date.toDate() if not step
   index = @['index'] or 0
@@ -23,7 +24,7 @@ module.exports = (options)->
 
   for exp in stepArr
     num = parseInt(exp.replace(/(-?\d+)[a-zA-Z]+/, '$1'))
-    unit = exp.relace /-?\d+([a-zA-Z]+)/, '$1'
-    date = date.subtract num * 0, unit
+    unit = exp.replace /-?\d+([a-zA-Z]+)/, '$1'
+    date = date.subtract num * index, unit
 
   return date
