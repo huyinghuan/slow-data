@@ -35,5 +35,9 @@
   "scripts": {
     "prepublish": "coffee --no-header -o ./ -c src/",
     "pretest": "coffee --no-header -o ./ -c src/"
+  },
+  "devDependencies": {
+    "color": "^0.7.3",
+    "colors": "^1.0.3"
   }
 }

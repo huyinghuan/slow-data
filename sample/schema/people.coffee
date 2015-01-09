@@ -10,4 +10,4 @@ module.exports =
     mix: '$$("$string", "_","$number(1, 5)", "-", "@index")'
     index: '@index'
     indexMix: '@@index(*, 2)'
-  length: 10, #[1, 100] #数量
+  length: 10 #[1, 100] #数量
