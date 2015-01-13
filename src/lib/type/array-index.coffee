@@ -6,8 +6,8 @@
 ###
 _ = require 'lodash'
 module.exports = (exp)->
-  type = "context-index"
-  orig = ["@index", "@index()"]
+  type = "array-index"
+  orig = ["@@index", "@@index()"]
   return type: type if _.indexOf(orig, exp) isnt -1
   reg = /^\@\@index\(([\+\*-\/]),\s*(\d+)\)$/
   return undefined if not reg.test exp

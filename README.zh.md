@@ -145,15 +145,15 @@ slowData.gen('$number(0, 20)')
 slowData.gen('$number(0, 20, 2)')
 ```
 
-### common(reg)
+### reg
 reg: 正则表达式
 
 ```
-slowData.gen('$common(/([a-z]|[A-Z]){3,7}/)')
+slowData.gen(/([a-z]|[A-Z]){3,7}/)
 ```
 
 ###regexp(reg)
-regStr: 正则表达式字符串 ，注意区别于```common(reg)```  common的reg是一个RegExp对象。这里的是个字符串
+regStr: 正则表达式字符串 ，注意区别于```reg```  reg是一个RegExp对象。这里的是个字符串
 
 ```
 slowData.gen("$regexp([(a-z)]{4,5})"）
@@ -161,6 +161,28 @@ slowData.gen("$regexp([(a-z)]{4,5})"）
 
 ### date(start, step, format)
 
+生成日期。 如果没有任何参数， 则默认为当前日期。
+
+当处在批量数据里面时， start, step, format参数起作用。
+也就是说，当你需要生成一个数组的数据时， 需要根据索引来规定每个时间的间隔，那么可以使用上面上个参数。
+
+其中start 和format 配合使用。
+start 规定 开始的日期， 类型是字符串，默认格式是YYYY-MM-DD HH:mm:ss
+比如说，你填的开始日期是 2014年12月5日，这个时候，你就 需要进行 格式设置了 format 设置为
+'YYYY年MM月DD日'，如果你按照默认格式 填写开始日期如："2014-12-30 00:00:00"那么就不需要设置format
+参数了。format 格式如下：（更详细可参考momenjs http://momentjs.com/）
+
+|Input | Example | Description|
+|----- | -----   | -----|
+|YYYY  | 2014    | 4 digit year|
+|YY    | 14      | 2 digit year|
+|Q     |1..4     | Quarter of year. Sets month to first month in quarter.|
+|M MM  |1..12    | Month number|
+|MMM MMMM|January..Dec|Month name in locale set by moment.locale()|
+|D DD|1..31|Day of month|
+
+step的设置是每个索引的间隔 .可以使用表达式 如： -1d12h  索引每次向前1，则时间递减12小时
+（当然其实和-12h效果一样。12的前面省略了+号），表达式如下：
 
 |Key    | Shorthand|
 |------ | --------|

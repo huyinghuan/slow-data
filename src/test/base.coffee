@@ -14,13 +14,13 @@ class TestBase
   testFactory: (option)->
     @factory(options) for i in [0..10]
 
-  testAll: (queue)->
+  testAll: (queue, context = {})->
     for index in queue
       typeObj =  @type(index)
       if typeObj
         console.log "express: #{index}, passed \n
              options: #{JSON.stringify(typeObj)},\n
-             result: #{@factory typeObj.options}".green
+             result: #{@factory.call(context, typeObj.options)}".green
       else
         console.log "express: #{index}  cann't resolve!".red
 

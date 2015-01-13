@@ -6,7 +6,7 @@
 ###
 _ = require 'lodash'
 _moment = require 'moment'
-module.exports = (options)->
+module.exports = (options, arrayContent)->
   format = 'YYYY-MM-DD HH:mm:ss'
   defOptions =
     start: _moment().format(format)
@@ -18,7 +18,9 @@ module.exports = (options)->
   #step仅用在step
   step = defOptions.step
   return date.toDate() if not step
-  index = @['index'] or 0
+
+
+  index = @['@index'] or 0
   stepArr = []
   stepArr = step.match /(-?\d+[a-zA-Z]+)/g
 
