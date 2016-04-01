@@ -11,7 +11,7 @@ class SlowData
     @schemaDirectroy = false
     @options =
       templateEnable: require './modules' #启用了哪些数据生成模块
-      templateAvailable: [__dirname] #拥有哪些数据模块
+      templateAvailable: [__dirname] #拥有哪些数据模块 
 
     if _.isPlainObject(schemaDirectory)
       options = schemaDirectory
@@ -26,11 +26,14 @@ class SlowData
 
   #配置
   setOptions: (options)->
+    #自定义配置可用选项
     if options.templateEnable
       _.extend @options.templateEnable, options.templateEnable
+    #邵明
     if options.templateAvailable
       @options.templateAvailable =
         @options.templateAvailable.concat options.templateAvailable
+
 
     @templateAvailableType  = _.map @options.templateAvailable, (filePath)->
       return _path.join(filePath, 'type')

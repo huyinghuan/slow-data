@@ -1,6 +1,6 @@
 {
   "name": "slow-data",
-  "version": "0.0.1rc1",
+  "version": "0.0.2",
   "description": "Generated anolog data by schema",
   "author": "huyinghuan",
   "homepage": "https://github.com/huyinghuan/slow-data",
@@ -29,7 +29,7 @@
   "dependencies": {
     "lodash": "^2.4.1",
     "moment": "^2.8.3",
-    "randexp": "^0.4.0",
+    "randexp": "^0.4.2",
     "sload": "0.1.3-rc4"
   },
   "scripts": {
@@ -37,7 +37,6 @@
     "pretest": "coffee --no-header -o ./ -c src/"
   },
   "devDependencies": {
-    "color": "^0.7.3",
     "colors": "^1.0.3"
   }
 }

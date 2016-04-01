@@ -11,4 +11,4 @@ module.exports =
   number: true
   regexp: true
   string: true
-  time: true
+  time: false

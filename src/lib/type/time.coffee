@@ -5,6 +5,7 @@
   $time(start, step)
   $time or $time() 当前时间
 ###
+_ = require 'lodash'
 module.exports =  (exp)->
   type = 'time'
   orig = ["$time", "$time()"]
